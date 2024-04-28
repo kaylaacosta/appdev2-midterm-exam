@@ -21,9 +21,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::prefix('api')->group(function () {
     Route::apiResource('/products', 'ProductController');
     
-    // Route for uploading an image using the local disk driver
     Route::post('/products/upload/local', 'ProductController@uploadLocal')->name('upload.local');
     
-    // Route for uploading an image using the public disk driver
     Route::post('/products/upload/public', 'ProductController@uploadPublic')->name('upload.public');
 });
+
+Route::middleware('product.access')->group(function () {
+});
+
